@@ -1,1 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1513 Provisions | Find Work</title>
+  <meta name="description" content="1513 Provisions — Find Work. John 15:13. Store coming soon.">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700;800&display=swap');
 
+    :root {
+      --black: #050505;
+      --white: #f5f5f5;
+      --gray: #111;
+      --line: rgba(255,255,255,.22);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Montserrat', Arial, sans-serif;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    nav {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 5%;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 3px;
+    }
+    .nav-links a:hover { opacity: .65; }
+
+    .nav-social {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    .nav-logo {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 175px;
+      max-width: 24vw;
+    }
+
+    .hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 50% 42%, rgba(255,255,255,.10) 0%, rgba(255,255,255,.025) 28%, transparent 55%),
+        linear-gradient(#030303, #090909);
+    }
+
+    /* Stylized mountain silhouette — no external image required */
+    .mountain {
+      position: absolute;
+      width: 120vw;
+      height: 70vh;
+      bottom: -7vh;
+      left: -10vw;
+      opacity: .92;
+      background: #151515;
+      clip-path: polygon(
+        0 100%, 8% 78%, 15% 85%, 23% 55%, 29% 68%,
+        39% 37%, 45% 51%, 52% 5%, 59% 44%, 67% 28%,
+        74% 57%, 81% 38%, 88% 66%, 94% 54%, 100% 100%
+      );
+    }
+
+    .mountain::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(125deg, transparent 48%, rgba(255,255,255,.20) 49%, transparent 51%),
+        linear-gradient(55deg, transparent 47%, rgba(255,255,255,.10) 48%, transparent 50%);
+      opacity: .65;
+    }
+
+    .fog {
+      position: absolute;
+      width: 120%;
+      height: 35%;
+      bottom: 18%;
+      left: -10%;
+      background: radial-gradient(ellipse, rgba(255,255,255,.08), transparent 65%);
+      filter: blur(22px);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      width: 90%;
+      max-width: 1100px;
+      padding-top: 80px;
+    }
+
+    .hero h1 {
+      font-family: 'Anton', Impact, sans-serif;
+      font-size: clamp(75px, 13vw, 190px);
+      line-height: .88;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-shadow: 0 4px 30px rgba(0,0,0,.8);
+    }
+
+    .verse-title {
+      margin: 35px auto 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 22px;
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: 6px;
+    }
+
+    .verse-title::before,
+    .verse-title::after {
+      content: "";
+      width: 150px;
+      height: 1px;
+      background: var(--white);
+      opacity: .75;
+    }
+
+    .verse {
+      max-width: 720px;
+      margin: 0 auto 42px;
+      font-size: 14px;
+      line-height: 2;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+
+    .button {
+      display: inline-block;
+      border: 1px solid var(--white);
+      padding: 19px 58px;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 4px;
+      transition: .25s ease;
+    }
+    .button:hover {
+      background: var(--white);
+      color: var(--black);
+    }
+
+    section { padding: 110px 7%; }
+
+    .mission {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 470px;
+      align-items: center;
+      gap: 70px;
+      background: #080808;
+    }
+
+    .cross-art {
+      min-height: 390px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background:
+        radial-gradient(circle at 50% 50%, #202020 0%, #090909 55%, #050505 75%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cross-rock {
+      width: 145px;
+      height: 245px;
+      background: linear-gradient(135deg, #303030, #0e0e0e);
+      clip-path: polygon(43% 0, 72% 8%, 91% 32%, 82% 72%, 94% 100%, 19% 94%, 5% 67%, 17% 25%);
+      position: relative;
+      box-shadow: 0 20px 50px #000;
+    }
+
+    .cross-rock::after {
+      content: "";
+      position: absolute;
+      width: 75px;
+      height: 135px;
+      left: 37px;
+      top: 52px;
+      background: #020202;
+      clip-path: polygon(37% 0, 63% 0, 63% 38%, 100% 38%, 100% 59%, 63% 59%, 63% 100%, 37% 100%, 37% 59%, 0 59%, 0 38%, 37% 38%);
+    }
+
+    .section-label {
+      font-size: 12px;
+      letter-spacing: 5px;
+      font-weight: 700;
+      margin-bottom: 18px;
+      opacity: .8;
+    }
+
+    h2 {
+      font-size: clamp(34px, 5vw, 64px);
+      letter-spacing: 8px;
+      line-height: 1.05;
+      margin-bottom: 25px;
+    }
+
+    .mission-copy p {
+      max-width: 590px;
+      font-size: 14px;
+      line-height: 2.2;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .store {
+      text-align: center;
+      background:
+        radial-gradient(ellipse at center, #181818 0%, #0b0b0b 65%, #050505 100%);
+    }
+
+    .store p {
+      margin: 0 auto 35px;
+      font-size: 13px;
+      letter-spacing: 4px;
+      line-height: 2;
+      text-transform: uppercase;
+    }
+
+    .store-icon {
+      font-size: 42px;
+      margin-bottom: 22px;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 65px 7% 35px;
+      text-align: center;
+      background: #030303;
+    }
+
+    footer img {
+      width: 175px;
+      margin-bottom: 32px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 35px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      margin-bottom: 30px;
+    }
+
+    .instagram {
+      font-size: 12px;
+      letter-spacing: 2px;
+      margin-bottom: 35px;
+    }
+
+    .copyright {
+      font-size: 9px;
+      letter-spacing: 3px;
+      opacity: .55;
+    }
+
+    @media (max-width: 700px) {
+      nav { padding: 20px 5%; }
+      .nav-links { gap: 14px; font-size: 9px; letter-spacing: 2px; }
+      .nav-logo { width: 115px; }
+      .nav-social { display: none; }
+      .hero { min-height: 850px; }
+      .hero h1 { font-size: clamp(62px, 17vw, 115px); }
+      .verse-title { gap: 10px; font-size: 13px; letter-spacing: 4px; }
+      .verse-title::before, .verse-title::after { width: 55px; }
+      .verse { font-size: 11px; letter-spacing: 2px; }
+      .button { padding: 17px 30px; font-size: 11px; }
+      section { padding: 75px 6%; }
+      .mission { grid-template-columns: 1fr; gap: 35px; }
+      .cross-art { min-height: 300px; }
+      h2 { letter-spacing: 5px; }
+      .mission-copy { text-align: center; }
+      .mission-copy p { font-size: 11px; letter-spacing: 2px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-links">
+      <a href="#home">HOME</a>
+      <a href="#store">STORE</a>
+      <a href="#mission">ABOUT</a>
+    </div>
+
+    <a href="#home">
+      <img class="nav-logo" src="1513-logo.png" alt="1513 Provisions">
+    </a>
+
+    <a class="nav-social" href="https://www.instagram.com/1513provisions/" target="_blank" rel="noopener">
+      INSTAGRAM @1513PROVISIONS
+    </a>
+  </nav>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="mountain"></div>
+      <div class="fog"></div>
+
+      <div class="hero-content">
+        <h1>FIND WORK</h1>
+
+        <div class="verse-title">JOHN 15:13</div>
+
+        <p class="verse">
+          GREATER LOVE HAS NO ONE THAN THIS:<br>
+          TO LAY DOWN ONE'S LIFE FOR ONE'S FRIENDS.
+        </p>
+
+        <a class="button" href="#store">ENTER THE STORE</a>
+      </div>
+    </section>
+
+    <section class="mission" id="mission">
+      <div class="cross-art">
+        <div class="cross-rock"></div>
+      </div>
+
+      <div class="mission-copy">
+        <div class="section-label">1513 PROVISIONS</div>
+        <h2>THE MISSION</h2>
+        <p>
+          1513 PROVISIONS EXISTS TO BUILD MORE THAN CLOTHING.
+          IT'S ABOUT PURPOSE. FAITH. DISCIPLINE.
+          WEAR THE MESSAGE. LIVE THE MISSION.
+        </p>
+      </div>
+    </section>
+
+    <section class="store" id="store">
+      <div class="section-label">COMING SOON</div>
+      <h2>THE STORE</h2>
+      <div class="store-icon">□</div>
+      <p>
+        THE STORE IS COMING SOON.<br>
+        BE THE FIRST TO KNOW.
+      </p>
+      <a class="button" href="https://www.instagram.com/1513provisions/" target="_blank" rel="noopener">
+        FOLLOW @1513PROVISIONS
+      </a>
+    </section>
+  </main>
+
+  <footer>
+    <img src="1513-logo.png" alt="1513 Provisions">
+    <div class="footer-links">
+      <a href="#home">HOME</a>
+      <a href="#store">STORE</a>
+      <a href="#mission">ABOUT</a>
+      <a href="https://www.instagram.com/1513provisions/" target="_blank" rel="noopener">INSTAGRAM</a>
+    </div>
+    <div class="instagram">@1513PROVISIONS</div>
+    <div class="copyright">© 2026 1513 PROVISIONS. ALL RIGHTS RESERVED.</div>
+  </footer>
+
+</body>
+</html>
